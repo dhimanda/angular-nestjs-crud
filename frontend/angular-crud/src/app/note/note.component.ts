@@ -17,20 +17,23 @@ export class NoteComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  addNote() {
-    this.dialog.open(AddNoteComponent);
+  addNote(): void {
+    this.dialog.open(AddNoteComponent, {
+      width: '300px',
+    });
     this.getAllNotes();
   }
 
-  deleteNote(noteIndex: number) {
+  deleteNote(noteIndex: number): void {
     this.noteService.deleteNote(noteIndex);
     this.getAllNotes();
   }
 
-  updateNote(noteIndex: number) {
+  updateNote(noteIndex: number): void {
     this.dialog.open(AddNoteComponent, {
+      width: '300px',
       data: {
-        noteIndex: noteIndex,
+        index: noteIndex,
       },
     });
   }

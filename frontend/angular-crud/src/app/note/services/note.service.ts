@@ -11,11 +11,16 @@ export class NoteService {
   getAllNotes(): Note[] {
     return this.notes;
   }
+  getNote(index: number): Note {
+    return this.notes[index];
+  }
   addNote(note: Note): void {
     this.notes.push(note);
   }
   deleteNote(index: number): void {
     this.notes = this.notes.filter((_, noteIndex) => index != noteIndex);
   }
-  updateNote(index: number, note: Note): void {}
+  updateNote(index: number, note: Note): void {
+    this.notes[index] = note;
+  }
 }
