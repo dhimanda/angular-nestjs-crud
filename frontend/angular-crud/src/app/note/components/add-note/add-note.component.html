@@ -3,32 +3,36 @@
   <div mat-dialog-content>
     <ng-container *ngIf="noteForm">
       <form [formGroup]="noteForm" fxLayout="column">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Title</mat-label>
           <input matInput formControlName="title" />
+          <mat-error *ngIf="noteForm.controls['title'].hasError('required')">Title should not be empty.
+          </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Description</mat-label>
           <textarea matInput formControlName="desc"> </textarea>
+          <mat-error *ngIf="noteForm.controls['desc'].hasError('required')">Description should not be empty.
+          </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Favorite food</mat-label>
+        <mat-form-field appearance="outline">
+          <mat-label>Priority</mat-label>
           <mat-select formControlName="priority" name="food">
             <mat-option *ngFor="let priority of priorities" [value]="priority">
               {{ priority }}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="noteForm.controls['priority'].hasError('required')">Priority should not be empty.
+          </mat-error>
         </mat-form-field>
         <div mat-dialog-actions align="end">
-          <button mat-flat-button color="warn">Discard</button>
-          <button mat-raised-button color="primary" cdkFocusInitial>Add</button>
+          <button mat-flat-button mat-dialog-close color="warn">Discard</button>
+          <button mat-raised-button type="submit" [disabled]="noteForm.invalid" color="primary" cdkFocusInitial
+            (click)="onFormSubmit()">
+            Add
+          </button>
         </div>
       </form>
     </ng-container>
-    <!-- <p>What's your favorite animal?</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="value" (keyup)="onChange()" />
-  </mat-form-field> -->
   </div>
 </div>

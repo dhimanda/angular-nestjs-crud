@@ -4,9 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NoteComponent } from './note.component';
-import { MAT_MODULES } from '../material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { MAT_MODULES } from '../material';
 import { AddNoteComponent } from './components/add-note/add-note.component';
+import { NoteService } from './services/note.service';
 
 const routes: Routes = [{ path: 'note', component: NoteComponent }];
 
@@ -20,5 +22,6 @@ const routes: Routes = [{ path: 'note', component: NoteComponent }];
     MAT_MODULES,
     FlexLayoutModule,
   ],
+  providers: [NoteService],
 })
 export class NoteModule {}

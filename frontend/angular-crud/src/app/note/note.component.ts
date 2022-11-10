@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddNoteComponent } from './components/add-note/add-note.component';
 
 import { Note } from './models/note.model';
+import { NoteService } from './services/note.service';
 
 @Component({
   selector: 'app-note',
@@ -10,42 +11,23 @@ import { Note } from './models/note.model';
   styleUrls: ['./note.component.scss'],
 })
 export class NoteComponent implements OnInit {
-  mockNotes: Note[] = [
-    {
-      priority: 'high',
-      title: 'Title 1',
-      desc: 'Desc 1',
-      priorityColor: 'warn',
-    },
-    {
-      priority: 'low',
-      title: 'Title 2',
-      desc: 'Desc 2',
-      priorityColor: 'primary',
-    },
-    {
-      priority: 'medium',
-      title: 'Title 3',
-      desc: 'Desc 3',
-      priorityColor: 'accent',
-    },
-  ];
+  mockNotes: Note[] = [];
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private noteService: NoteService) {}
 
   ngOnInit(): void {}
 
   addNote() {
-    this.dialog.open(AddNoteComponent, { width: '500px' });
-    // this.mockNotes.push({
-    //   priority: 'high',
-    //   title: 'Title 4',
-    //   desc: 'desc 4',
-    //   priorityColor: 'accent',
-    // });
+    this.dialog.open(AddNoteComponent);
+    this.getAllNotes();
   }
 
   deleteNote(noteIndex: number) {
-    this.mockNotes = this.mockNotes.filter((_, index) => index != noteIndex);
+    this.noteService.deleteNote(noteIndex);
+    this.getAllNotes();
+  }
+
+  private getAllNotes(): void {
+    this.mockNotes = this.noteService.getAllNotes();
   }
 }

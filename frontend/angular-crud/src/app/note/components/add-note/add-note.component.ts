@@ -5,6 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Note } from '../../models/note.model';
+import { NoteService } from '../../services/note.service';
 
 @Component({
   selector: 'app-add-note',
@@ -16,7 +19,11 @@ export class AddNoteComponent implements OnInit {
   priorities: string[] = ['high', 'medium', 'low'];
   noteForm: FormGroup | null = null;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private noteService: NoteService,
+    private dialogRef: MatDialogRef<AddNoteComponent>
+  ) {}
 
   //init
   ngOnInit(): void {
@@ -27,7 +34,20 @@ export class AddNoteComponent implements OnInit {
     });
     console.log(this.noteForm);
   }
-  onChange(): void {
-    console.warn(this.value);
+
+  onFormSubmit() {
+    if (this.noteForm === null) return;
+    let note: Note = {
+      title: this.noteForm.controls['title'].value,
+      desc: this.noteForm.controls['desc'].value,
+      priority: this.noteForm.controls['priority'].value,
+      priorityColor: 'primary',
+    };
+    this.noteService.addNote(note);
+    this.dialogRef.close();
+    console.log(
+      '🚀 ~ file: add-note.component.ts ~ line 32 ~ AddNoteComponent ~ onFormSubmit ~ this.noteForm',
+      this.noteForm
+    );
   }
 }
