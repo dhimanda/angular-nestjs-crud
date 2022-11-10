@@ -1,8 +1,4 @@
-<div
-  class="note-wrapper"
-  fxLayout="column"
-  fxLayoutAlign="space-between center"
->
+<div class="note-wrapper" fxLayout="column" fxLayoutAlign="space-between center">
   <button mat-fab color="primary" class="add-btn" (click)="addNote()">
     <mat-icon>add</mat-icon>
   </button>
@@ -12,7 +8,7 @@
         <mat-chip-list>
           <mat-chip [color]="note.priorityColor" selected>{{
             note.priority
-          }}</mat-chip>
+            }}</mat-chip>
         </mat-chip-list>
       </mat-card-subtitle>
       <mat-card-title>{{ note.title }}</mat-card-title>

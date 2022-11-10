@@ -27,6 +27,14 @@ export class NoteComponent implements OnInit {
     this.getAllNotes();
   }
 
+  updateNote(noteIndex: number) {
+    this.dialog.open(AddNoteComponent, {
+      data: {
+        noteIndex: noteIndex,
+      },
+    });
+  }
+
   private getAllNotes(): void {
     this.mockNotes = this.noteService.getAllNotes();
   }
